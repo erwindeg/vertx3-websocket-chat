@@ -17,7 +17,8 @@ public class Main extends AbstractVerticle{
 
     public void start() throws Exception {
         vertx.createHttpServer().websocketHandler(handler -> {
-            System.out.println("client connected: "+handler.textHandlerID());
+            System.out.println("client connected: "+handler.remoteAddress());
+
 
             vertx.eventBus().consumer(CHAT_CHANNEL, message -> {
                 handler.writeTextMessage((String)message.body());
